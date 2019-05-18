@@ -22,6 +22,10 @@ app.post("/", function(req, res){
             {
                 email_address: email,
                 status: "subscribed",
+                merge_fields: {
+                    FNAME: firstName,
+                    LNAME:lastName
+                }
             }
         ]
     };
@@ -41,9 +45,12 @@ app.post("/", function(req, res){
 
     request(options, function(error, response, body){
         if(error) {
-            console.log(error);
+            res,send("There was an error with signing up, please try again!")
+        } else if (response.statusCode === 200) {
+            res.send("Successfully subscribed!")
+            // console.log(response.statusCode);
         } else {
-            console.log(response.statusCode);
+            res.send("There was an error with signing up, please try again!");
         }
     });
 
@@ -54,7 +61,3 @@ app.listen(3000, function(){
     console.log("Server is running on port 3000");
 });
 
-
-// 99f2981e425eaf7e4d9d0c97c1b7e220-us20
-
-// cd049b49d2
