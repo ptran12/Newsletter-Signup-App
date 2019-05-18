@@ -47,10 +47,10 @@ app.post("/", function(req, res){
         if(error) {
             res,send("There was an error with signing up, please try again!")
         } else if (response.statusCode === 200) {
-            res.send("Successfully subscribed!")
+            res.sendFile(__dirname + "/success.html");
             // console.log(response.statusCode);
         } else {
-            res.send("There was an error with signing up, please try again!");
+            res.sendFile(__dirname + "/failure.html");
         }
     });
 
